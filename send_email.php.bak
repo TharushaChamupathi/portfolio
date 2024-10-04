@@ -1,0 +1,25 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $subject = htmlspecialchars($_POST['subject']);
+    $body = htmlspecialchars($_POST['body']);
+
+    $to = "serikadesigners@gmail.com"; // Change to your email
+    $headers = "From: $email" . "\r\n" .
+               "Reply-To: $email" . "\r\n";
+
+    $message = "Name: $name\n";
+    $message .= "Email: $email\n";
+    $message .= "Subject: $subject\n";
+    $message .= "Message: $body\n";
+
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Email sent successfully.";
+    } else {
+        echo "Email sending failed.";
+    }
+} else {
+    echo "Invalid request.";
+}
+?>
